@@ -1,0 +1,16 @@
+<div ng-include src="'templates/navbar.html'"></div>
+<div ng-include src="'templates/menu.html'"></div>
+<div class="container" ng-class="{'smallmenu': menubool}">
+    <div class="row">
+        <div class="col-md-4" ng-repeat="product in products">
+            <a href="#/products/{{product.id}}/">
+                <img class="img-responsive" ng-src="{{host}}{{product.images[0].image_detail.url}}">
+            </a>
+            <a href="#/products/{{product.id}}/">
+                <h2>{{ product.name }}</h2>
+            </a>
+            <p> 价格: {{ product.price }} 元 </p>
+        </div>
+    </div>
+</div>
+<div ng-include src="'templates/popup.html'"></div>

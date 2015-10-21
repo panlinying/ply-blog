@@ -1,0 +1,52 @@
+.avatar{
+	position: absolute;
+	width: 600px;
+	left: 50%;
+	margin-left: -300px;
+	top: 50%;
+	margin-top: -175px;
+	background-color: #fcfcfc;
+	border: 1px solid #c4c4c4;
+	box-shadow: 0 0 12px #c4c4c4;
+	padding-top: 10px;
+	z-index: 302;
+	display: none;
+}
+.avatar p{
+	font-size:12px;
+	margin-bottom:10px;
+	margin-left:15px;
+}
+.avatar .ng-image-crop{
+	margin-top:10px;
+	margin-left:15px;
+}
+.avatar input[type=file]{ visibility:hidden; }
+.avatar_left{
+	float:left;
+	width: 445px;
+	padding-left: 15px;
+}
+.avatar_right{
+	float:right;
+	width:120px;
+}
+.avatar_right a{
+	margin-top:10px;
+	width:100px;
+	line-height:25px;
+	font-size:12px;
+	display:block;
+	border:1px solid #4f4d4d;
+	text-align:center;
+	border-radius:2px;
+	color:#4f4d4d;
+	margin-bottom:13px;
+}
+.avatar_right a.btn_avatar_save{
+	margin-top:0;
+	color:#fcfcfc;
+	border:1px solid #4f4d4d;
+	background-color:#39C; 
+}
+.ng-image-crop button{ visibility:hidden; }
