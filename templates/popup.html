@@ -1,0 +1,93 @@
+<!--  反馈窗口  -->
+<div id="chatTool" ng-click="showchatBox()" ng-hide="chatnum">
+   <img src="images/iconemail.png" alt=""><span>使用反馈</span>
+   <em ng-click="closeChatTool()">x</em>
+</div>
+<div id="chatBox">
+    <div class="top justify"  ng-click="hidechatBox()">
+        <div class="left box">给我们留言!</div>
+        <div class="right box">-</div>
+    </div>
+    <div class="tip">
+        如果您在使用中遇到了问题，或对我们的产品有任何建议，欢迎留言，我们会尽快处理！
+    </div>
+    <form>
+        <textarea name="message" id="message"></textarea>
+        <button ng-click="send_message()">留言</button>
+    </form>
+</div>
+
+<!--  新建品牌弹窗  -->
+ <div id="newBrand" class="popAddCollShow"> 
+    <div class="popwrap">  
+        <form>
+            <label>*品牌名称:</label> <input type="text" id="NewBd_name"/> <br/>
+            <label>*成立时间:</label> <input type="text" id="NewBd_time"/> <br/>
+            <label>品牌介绍:</label> <textarea id="NewBd_des"></textarea>
+            <div class="blockBtn">
+                <button type="button" ng-click="new_brand()">确定</button>
+                <button type="button" ng-click="hidenewBrand()">取消</button>
+            </div>
+        </form>
+    </div>
+</div>
+<div id="DeltBrand" class="popAddCollShow">
+    <div class="popwrap"> 
+        <div class="tip">品牌删除后，无法恢复。<br/> 确认删除吗？</div>
+        <div class="blockBtn">
+            <button type="button" ng-click="YDBrand()">确定</button>
+            <button type="button" ng-click="NDBrand()">取消</button>
+        </div>
+    </div>
+</div>
+
+<!--  新建买手弹窗  -->
+<div id="NewBuyer" class="NewBuyer" ng-controller="PopupCtrl">  
+    <div class="title">新建买手</div>
+    <div class="close" ng-click="hide_new_buyer()"></div>
+    <form name="newbuyerForm">
+        <div class="buyerInfo">
+            <ul>
+                <li>
+                    <label><span class="need">*</span>买手店名:</label> 
+                    <input type="text" id="Pop_company" name="company" required/>
+                </li>
+                <li>
+                    <label><span class="need">*</span>买手姓名:</label> 
+                    <input type="text" id="Pop_username" name="username"  required/>
+                </li>
+                <li>    
+                    <label>邮箱:</label>
+                    <input type="text"  id="Pop_email" name="email" required/>
+                </li>
+                <li>
+                    <label>电话:</label> 
+                    <input type="text" id="Pop_phone" name="phone" required/>
+                </li>
+                <li>
+                    <label class="top">收货地址:</label>
+                    <div class="distpicker">
+                        <div class="inlineb sjx"><select class="addressPro" id="Pop_province" required></select></div>
+                        <div class="inlineb sjx"><select class="addressCity" id="Pop_city" required></select></div><br/>
+                        <input name="address" type="text" id="Pop_address" />
+                    </div>
+                </li>
+                <li> 
+                    <label><span class="need">*</span>价格方式:</label> 
+                    <div class="inlineb sjx">
+                        <select id="Pop_price_type" class="price">
+                            <option value="0">零售价为基准</option>
+                            <option value="1">批发价为基准</option>
+                        </select>
+                    </div>
+                    <div class="inlineb dis">
+                        <input type="number" min="0" max="100" id="Pop_discount" name="discount" placeholder="折扣"  /><span>%</span>
+                    </div>
+                </li>
+            </ul>
+            <div class="center button">
+                <a href="javascript:void(0);" ng-click="new_buyer()">新建买手</a>
+            </div>
+        </div>
+    </form>
+</div>

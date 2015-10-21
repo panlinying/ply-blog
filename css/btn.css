@@ -1,0 +1,80 @@
+.btn-search{
+    padding:6px 80px;
+    background-color: #4a4a4a;
+    color:#ffffff;
+    cursor:pointer;
+    border-radius: 2px;
+    border:0;
+    overflow:hidden;
+}
+.btn-search:hover{
+    box-shadow:0 1px 3px rgba(0,0,0,0.5);
+}
+
+.btn-confirm{
+    padding:0;
+    font-size:16px;
+    line-height: 32px;
+    border:none;
+    background-color: #67638D;color: white;
+    box-shadow: 0 4px #384064;
+    width:250px;height:32px;
+    cursor:pointer;
+    border-radius: 4px;
+    transition:background-color 0.3s linear;
+    -moz-transition:background-color 0.3s linear;
+    -webkit-transition:background-color 0.3s linear;
+    -o-transition:background-color 0.3s linear;
+}
+.btn-confirm:hover{background-color: #595679;border-radius: 4px;}
+
+.btn-product-edit{
+    font-size:16px;
+    background-color:#4a4a4a;
+    color:#FFFFFF;
+    border-radius:2px;
+    cursor:pointer;
+    line-height: 40px;
+    width:350px;
+    height:40px;
+    overflow:hidden;
+}
+.btn-product-delete{
+    width:350px;height:40px;
+    text-align: center;
+    background: #da1f21;
+    color:#FFFFFF;
+    border-radius:2px;
+    cursor:pointer;
+    line-height: 40px;
+    font-size:16px;
+}
+
+.btn-image-upload{
+    font-size:16px;
+    cursor:pointer;
+    color:#3d406d;
+    border: 1px solid #3d406d;
+    border-radius: 4px;
+    padding:0 1em;
+    transition:background-color 0.3s linear;
+    -moz-transition:background-color 0.3s linear;
+    -webkit-transition:background-color 0.3s linear;
+    -o-transition:background-color 0.3s linear;
+}
+.btn-img-delete{
+    font-size:16px;
+    background-image: url("../images/icon.png");
+    background-position:-44px -81px;
+    background-repeat: no-repeat;
+    padding:8px 14px;
+    cursor:pointer;
+}
+.btn-reset{
+    line-height: 27px;
+    font-size:16px;
+    cursor:pointer;
+    float:right;
+    margin-right: 16px;
+    margin-top:22.5px;
+}

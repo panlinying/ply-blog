@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="images/favicon.ico" rel="shortcut icon" type="image/x-icon" media="screen">
+    <link href="css/buyer.css" rel="stylesheet" media="screen">
+    <link href="css/login.css" rel="stylesheet" media="screen">
+    <title>Breadgy</title>
+</head>
+<body ng-app="jeanineApp">
+        <div class="login-container">
+            <div class="header">
+                <div class="wrap fn-clear">
+                    <a class="fn-left" href="javascript:;">
+                        <img src="images/logo.png"/>
+                    </a>
+                </div>
+            </div>
+            <div class="wrap-container">
+                    <form class="login-wrap" name="activateForm" novalidate ng-submit="update_data(activateForm.$valid)">
+                            <div class="login-content">
+                                    <div class="login-tag-1">基本信息</div>
+                                    <div>
+                                        <div class="login-tag-2">成立时间：</div>
+                                        <div class="user-name"><input type="text" name="startTime" placeholder="成立时间"  ng-model="create_time" ></div>
+                                    </div>
+                                    <div>
+                                        <div class="login-tag-2">*品牌名：</div>
+                                        <div class="user-name brand-NM"><input type="text" name="brandName" placeholder="品牌名称"  required ng-model="name" ng-class="{'error-input':submitted && activateForm.brandName.$invalid}"></div>
+                                    </div>
+                                    <div class="input-part">
+                                        <div class="login-tag-2">简介：</div>
+                                        <div ><textarea rows="6" name="buyer-detail" placeholder="品牌详细介绍" ng-model="description"></textarea></div>
+                                    </div>
+                                    <div>
+                                        <div class="login-tag-2">*联系人：</div>
+                                        <div class="user-name user-NM"><input ng-class="{'error-input':submitted && activateForm.userName.$invalid}" type="text" name="userName" placeholder="姓名" required ng-model="username" ></div>
+                                    </div>
+                                    <div class="input-part">
+                                        <div class="login-tag-2">*电话：</div>
+                                        <div class="user-password user-tel">
+                                                <input type="tel" name="userPhone" placeholder="电话" required ng-model="phone" ng-class="{'error-input':submitted && activateForm.userPhone.$invalid}">
+                                        </div>
+                                    </div>
+                                    <button type="submit" class="login-color" ng-class= "{'btn-loading-login':avoidClick}" ng-disabled="avoidClick">开始使用</button>
+                            </div>
+                    </form>
+            </div>
+        </div>    
+</body>
+</html>

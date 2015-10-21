@@ -1,0 +1,46 @@
+<style type="text/css" media="screen">
+  body{ padding-top: 0;}
+</style>
+<div class="whitetitle"> 系列名 </div>
+<div class="wrapper">
+    <div class="form-group">
+        <div class="search-head-1">系列名：<span>{{order_list.product_total}}</span></div>
+        <a class="btn btn-com btn-xs" href="#/output" role="button">导出</a>
+        <a class="btn btn-com btn-xs" href="#/output" role="button">打印</a>
+    </div>
+    <div class="orderbox addshadow">
+        <table>
+            <thead>
+                <tr>
+                    <td>图例</td>
+                    <td>商品名</td>
+                    <td>性别</td>
+                    <td>色号</td>
+                    <td>颜色</td>
+                    <td>商家编码</td>
+                    <td>尺码</td>
+                    <td>零售价</td> 
+                    <td>成分</td> 
+                </tr>
+            </thead>
+            <tbody>
+                <tr ng-repeat="good in order_list.goods">
+                    <td><img  /></td>
+                    <td class="maxwh">{{good.name}}</td>
+                    <td>{{good.color_code}}</td>
+                    <td>{{good.color}}</td>
+                    <td>
+                        <div class="tabbox" ng-repeat="(m,n) in good.sizes">{{m}}</div>
+                    </td>
+                    <td>
+                        <div class="tabbox" ng-repeat="(m,n) in good.sizes">{{n}}</div>
+                    </td>
+                    <td>&yen;&nbsp;{{good.price}} </td>
+                    <td> {{good.composition}} </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+<div ng-include src="'templates/popup.html'"></div>
+

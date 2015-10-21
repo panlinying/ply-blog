@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="css/login.css" rel="stylesheet" media="screen">
+    <!--<link href="css/ngCropper.all.min.css" rel="stylesheet" media="screen">-->
+    <title>Air</title>
+</head>
+<body ng-app="jeanineApp">
+    <script src="js/message_bre.js"></script>
+    <div class="login-container">
+        <div class="header">
+            <div class="wrap fn-clear">
+                <a class="fn-left" href="javascript:;">
+                    <img src="images/logo.png"/>
+                </a>
+            </div>
+        </div>
+        <div class="wrap-container banner">
+            <div class="login-wrap">
+                <div class="login-content">
+                    <div class="login-tag-1">
+                        <p>注册成功！请去邮箱激活</p>
+                    </div>
+                    <a class="login-no-color activateEmail" href="#" target="_blank">去邮箱激活</a>
+                    <button class="login-no-color" ng-click="resend_activate()" ng-disabled ="!waitTime" ng-class="{'disabledButton':!waitTime}">
+                        <span class="60seconds"  ng-hide="waitTime">{{m}}秒后可以</span>
+                        <span class="resend_email" ng-class= "{'btn-loading-login':avoidClick}">重新发送激活邮件</span>
+                    </button>
+                    <div class="return-login"><a ng-href="#/login">返回登录</a></div>
+
+                </div>
+            </div>
+        </div>
+    </div>    
+</body>
+</html>
