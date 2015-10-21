@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="css/login.css" rel="stylesheet" media="screen">
+    <!--<link href="css/ngCropper.all.min.css" rel="stylesheet" media="screen">-->
+    <title>Air</title>
+</head>
+<body ng-app="jeanineApp">
+    <script src="js/message_bre.js"></script>
+    <div class="login-container">
+        <div class="header">
+            <div class="wrap fn-clear">
+                <a class="fn-left" href="javascript:;">
+                    <img src="images/logo.png"/>
+                </a>
+            </div>
+        </div>
+        <div class="wrap-container banner">
+            <div class="login-wrap login-wrap-login">
+                <form name="loginForm" novalidate class="login-content" ng-submit="submitForm(loginForm.$valid)">
+                    <!-- ng-keyup="$event.keyCode == 13&&login()"-->
+                    <div class="login-tag-1">品牌入口</div>
+                    <div>
+                        <div class="login-tag-2">用户名：</div>
+                        <div class="user-name">
+                            <input name="username" autofocus="autofocus" tabindex="1"
+                                   type="email" placeholder="邮箱" ng-model="username" required
+                                   ng-class="{'error-input':submitted && loginForm.username.$invalid}">
+                            <div class="error" ng-show="submitted && loginForm.username.$invalid">请输入邮箱&nbsp;&nbsp;</div>
+                            <div class="error" ng-show="loginForm.username.$dirty && loginForm.username.$error.email">
+                                邮箱格式不对
+                            </div>
+                        </div>
+                    </div>
+                    <div>
+                        <div class="login-tag-2">密码：</div>
+                        <div class="user-password">
+                            <input tabindex="2" name="password"
+                                   type="password" placeholder="密码" ng-model="password" required
+                                   ng-class="{'error-input':submitted && !loginForm.password.$valid}">
+                            <div class="error"
+                                 ng-show="!loginForm.username.$error.email &&
+                                    !loginForm.password.$valid && loginForm.username.$valid && submitted">
+                                请输入密码
+                            </div>
+                        </div>
+                    </div>
+                    <div class="forget-pwd"><a ng-href="#/forget_pwd">忘记密码</a></div>
+                    <button type="submit" tabindex="3" id="login" class="login-color action_text" ng-class= "{'btn-loading-login':loginForm.$valid && avoidClick}" ng-disabled="loginForm.$invalid && avoidClick" value="登录">登<div class="blankControl"></div>录</button>
+                    <a tabindex="4" class="login-no-color" ng-href="#/register">立即注册</a>
+                </form>
+            </div>
+        </div>
+    </div>    
+</body>
+</html>

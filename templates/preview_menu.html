@@ -1,0 +1,12 @@
+<div class="pre_leftside">
+        <a class="allbrands" href="#/product_manage">退出预览</a>
+        <ul class="brands">
+                <li>
+                        <a ng-click="show_brandlist($event)">{{ brand.name }}</a>
+                        <div class="prev-brand-list" ng-style="{'display': show_brand_menu(brand.id) }">
+                                <a ng-href="#/preview_brand"  ng-class="{'brand-list-active': isBrandDetail()}">品牌详情</a>
+                                <a ng-href="#/preview_linesheet" ng-class="{'brand-list-active': isProductList()}">查看商品</a>
+                        </div>
+               </li>      
+        </ul>
+</div>

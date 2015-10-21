@@ -1,0 +1,44 @@
+<div ng-include src="'templates/navbar.html'"></div>
+<div ng-include src="'templates/menu.html'"></div>
+<div class="container" ng-class="{'smallmenu': menubool}">
+    <div class="tagtitle"> 邀请码 </div>
+    <div class="wrapper">
+        <div class="whitebg maishou addshadow margintop clearfix">
+            <div class="padtwo">
+                <div class="coupon-filter">
+        			<a class="icon icon-check" id="check_all" ng-click="codeSelectAll($event,code_list)">全选</a>
+                	<a class="coupon-used">总数({{ code_list.length }})</a>
+                    <a class="coupon-free">未使用({{ (code_list | filter: { is_used: false }).length }})</a>
+                    <div class="coupon-action">
+                    	<a class="btn btn-com" ng-click="addCode()"> + 添加邀请码</a>
+                        <a class="btn btn-com" role="button" ng-click="delete_code_list()">删除</a>
+                    </div>
+                </div>
+                <table class="table-normal tb-coupon tb-code" cellspacing="0">
+                    <tr>
+                        <th width="65"></th>
+                        <th width="65">序列</th>
+                        <th>邀请码</th>
+                        <!--<th>有效日期</th>-->
+                        <!--<th>接收用户</th>-->
+                        <th width="100">状态</th>
+                        <th width="150">操作</th>
+                    </tr>
+                    <tr ng-repeat="code in code_list">
+                    	<td><a class="icon icon-check" ng-click="codeSelect($event, code)"></a></td>
+                        <td>{{ $index + 1 }}</td>
+                        <td>{{ code.code }}</td>
+                        <!--<td>2015-12-30前</td>-->
+                        <!--<td>Charles Wang</td>-->
+                        <td>{{ code_status[code.is_used] }}</td>
+                        <td>
+                        	<a class="icon icon-delete" role="button" ng-click="delete_code(code.id, $index)"></a>
+                            <!--<a class="icon icon-send" role="button"></a>-->
+                        </td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+<div ng-include src="'templates/popup.html'"></div>
