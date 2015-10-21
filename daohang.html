@@ -1,0 +1,51 @@
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title>daohang</title>
+    <style rel="stylesheet" type="text/css">
+        *{margin:0; padding:0;}  /*所有元素默认无边距*/
+        div {height:2em}
+        nav {max-height:0;overflow:hidden;background-color:lightgreen;}
+        .active {max-height:6em}
+        nav ul {list-style-type:none;} /*去掉列表前的符号*/
+        nav li {border:0.05em solid #f2f2f2;text-align: center;}/*使字体居中*/
+        nav li a { text-decoration: none;} /*控制链接样式*/
+        header div {float:right;cursor:pointer;text-align: center;height:2em;}
+        .btn-list {
+            margin:0.9em 0.1em;height: 0.2em;width:1.5em;
+            content: "";background-color:lightgreen;display:inline-block;
+            box-shadow:0 0.5em 0 lightgreen,0 -0.5em 0 lightgreen;
+        }
+
+        @media only screen and (min-width: 30em){
+            nav{max-height:none;}
+            nav ul {overflow: hidden; }/*包住li*/
+            nav li {display: block;float:left;width: 6em;height: 4em;}/*横向导航*/
+            nav li a { line-height: 4em;} /*a字体居中*/
+            .btn-list{display: none;}
+        }
+    </style>
+    <script src="../jquery-1.11.3.min.js"></script>
+    <script type="text/javascript">
+        $(document).ready(function(){
+            $("#list").click(function(){
+                $("nav").toggleClass("active");
+            });
+        });
+    </script>
+</head>
+<body>
+<header>
+    <div id="list"><span class="btn-list"></span></div>
+</header>
+<nav class="example">
+    <ul>
+         <li><a href="#">首页</a></li>
+         <li><a href="#">list1</a></li>
+         <li><a href="#">list2</a></li>
+         <li><a href="#">list3</a></li>
+    </ul>
+</nav>
+    <article><h5>缩小屏幕尺寸，点击右上导航</h5>我是网站内容</article>
+</body>
+</html>

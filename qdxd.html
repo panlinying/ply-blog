@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title>PLY front-end web</title>
+    <style type="text/css">
+        * {margin:0;padding:0;}
+        body{background-color: #f2f2f2}
+        nav{border-bottom:1px solid skyblue;background-color:white;margin:40px auto;width:1350px;height:60px;}
+        .list a{height:60px;text-decoration:none;display:block;line-height:60px;font-family:inherit;font-weight:bold;font-size:20px;color:darkgray}
+        .list a:hover{background-color:gray;color:white;}
+        .zaiyao:hover{border:1.5px solid darkorange;}
+        .zaiyao a {color:darkorange;}
+        .list ul{margin:0 0 0 200px;height:60px;overflow:hidden;}
+        .list li{list-style-type:none; height:60px;float:left;}
+        .list li a{padding:0 30px;}
+        /*设置过渡效果*/
+        .list a,.zaiyao{-webkit-transition:background-color 0.3s linear,
+                                   color 0.4s linear;
+                -moz-transition:background-color 0.3s linear,
+                                color 0.4s linear;
+                -o-transition:background-color 0.3s linear,
+                              color 0.4s linear;
+                transition:background-color 0.3s linear,
+                              color 0.4s linear;}
+        .zaiyao{border:1px solid #f2f2f2;color:gray;font-size:16px;margin:20px 0 0 200px;width:700px;height:200px;background-color:white;}
+        .zaiyao h4,.zaiyao a {padding:16px 0 16px 16px;}
+        .zaiyao hr{border:1px dashed lightgrey;}
+    </style>
+    <script src="jquery-1.11.3.min.js"></script>
+</head>
+<body>
+    <nav class="list">
+        <ul>
+            <li><a href="index.html">首页</a></li>
+            <li><a href="qdxd.html">前端心得</a></li>
+            <li><a href="#">人生感悟</a></li>
+            <li><a href="http://eland.sinaapp.com/report">我的项目</a></li>
+            <li><a href="#" title="me">关于我</a></li>
+        </ul>
+    </nav>
+
+    <section class="blog">
+        <div class="zaiyao">
+            <h4>响应式网站实践方法（一）</h4>
+            <hr />
+            <div style="margin:16px 0;">&nbsp;&nbsp;现在做网站，不仅要考虑用户，还要考虑他们用的设备。让不同的用户在不同的环境下获得最佳体验，就是响应式网站的目的。
+
+            我们观察国内外主流网站，第一个给用户响应式体验的，是它的导航。......
+            <a href="xiangyingshi1.html">更多</a></div>
+            <hr />
+            <span style="font-size:16px;margin:8px 0 8px 24px">响应式，导航</span>
+        </div>
+    </section>
+
+<script type="text/javascript">
+    $(document).ready(function(){
+        $("a[title='me']").click(function(){
+            $(".blog").load("me.html");
+            return false;
+        });
+    });
+
+
+</script>
+</body>
+</html>
