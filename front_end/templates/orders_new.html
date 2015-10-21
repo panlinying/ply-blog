@@ -1,0 +1,248 @@
+<div ng-include src="'templates/navbar.html'"></div>
+<div ng-include src="'templates/menu.html'"></div>
+<div class="container" ng-class="{'smallmenu': menubool}">
+    <div class="tagtitle"> 新建订单 </div>
+    <div class="wrapper order_detail">
+        <!--           选择买手            -->
+        <div class="info-list addshadow">
+            <div class="info-head">买手信息</div>
+            <div class="buyer-info-container clearfix">
+                <div class="buyer-info" ng-show="choice_finish && chosed_buyer" >
+                    <div class="buyer-detail">
+                        <div class="buyer-image">
+                            <img ng-show="chosed_buyer.create_by_brand" class="usr-avatar" src="images/peol.png" />
+                            <img ng-show="!chosed_buyer.create_by_brand"  class="usr-avatar" ng-src="{{host}}{{chosed_buyer.avatar.url}}">
+                        </div>
+                    </div>
+                    <div class="buyer-detail">
+                        <div class="buyer-name">{{chosed_buyer.username}}</div>
+                    </div>
+                    <div class="buyer-detail">
+                        <div class="buyer-mb">{{price_type[chosed_buyer.price_type]}}</div>
+                    </div>
+                    <div class="buyer-detail">
+                        <div class="buyer-email">
+                          <span>电话：{{chosed_buyer.phone}}</span>
+                          <span>Email：{{chosed_buyer.email}}</span>
+                        </div>
+                    </div>
+                    <div class="buyer-detail">
+                        <div class="buyer-com">{{chosed_buyer.company}}</div>
+                    </div>
+                </div>
+                <div class="addOrNew">
+                    <a ng-hide="changeby" ng-click="chose_buyer()">选择买手</a>
+                    <a ng-show="changeby" ng-click="change_buyer()">更改买手</a>
+                </div>
+            </div>
+        </div>
+        <!--           选择买手   弹出框          -->
+        <div id="ChoseBuyer" class="NewBuyer" ng-controller="PopupCtrl">  
+            <div class="title">选择买手</div>
+            <div class="close" ng-click="hide_chose_buyer()"></div>
+            <div class="ChBybox">
+                <div class="search">
+                    <input type="text" placeholder="买手名或买手店" ng-model="buyer_key"/>
+                    <span class="icon icon-search2"></span>
+                </div>
+                <div class="table">
+                    <table>
+                        <tr ng-click="pickon_buyer(b)" ng-class="{'selected':b.id == select_buyer.id}" ng-repeat="b in buyer_list | filter: buyerFilter | orderBy:order_by:reverse">
+                            <td><span class="icon-right"></span></td>
+                            <td>
+                                <img ng-show="b.create_by_brand" class="usr-avatar" src="images/peol.png" />
+                                <img ng-show="!b.create_by_brand"  class="usr-avatar" ng-src="{{host}}{{b.avatar.url}}">
+                            </td>
+                            <td>{{ b.username }}</td>  
+                            <td>{{ b.company }} </td> 
+                        </tr>
+                    </table>
+                </div>
+                <div class="chosebtn clearfix">
+                    <div class="left">
+                        <a ng-click="chose_buyer_sure()">选择</a>
+                        <a ng-click="new_by()">新建买手</a>
+                    </div>
+                    <div class="right pagename">
+                    <!--    <a href="#">1</a>
+                            <a href="#">2</a>
+                            <a href="#">3</a> -->
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!--           选择商品        -->
+        <div class="info-list addshadow clearfix">
+            <div class="info-head">商品信息</div>
+            <div class="productInfo-container" ng-show="show_goods_box">
+                <table class="productInfo-table" style="border-collapse: collapse;">
+                    <thead>
+                        <tr class="label-name">
+                            <th>例图</th>
+                            <th>商品名</th>
+                            <th>单价</th>
+                            <th>商品编码</th>
+                            <th>尺码</th>
+                            <th>数量</th>
+                            <th>金额小计</th>
+                            <th>操作</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr ng-repeat="product in products" ng-show="product.selected">
+                            <td><img ng-src="{{host}}{{product.image.url}}" /></td>
+                            <td>{{product.name}}</td>
+                            <td>&yen;{{product.price}}</td>
+                            <td><div class="size_list" ng-repeat="k in product.sizes" >{{k.sku}}</div></td>
+                            <td><div class="size_list" ng-repeat="s in product.sizes" >{{s.size}} </div></td>
+                            <td>
+                                <div class="tabbox" ng-repeat="s in product.sizes">
+                                    <a class="changeNum" ng-click="dec_num(s, product)">-</a>
+                                    <span class="num">{{s.amount}}</span>
+                                    <a class="changeNum"ng-click="inc_num(s, product)">+</a>
+                                </div>
+                            </td>
+                            <td>&yen;{{product.price*product.total_number}}</td>
+                            <td><span class="icon icon-delete" ng-click="delete_product(product)"></span></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div class="addOrNew">
+                <a ng-click="add_goods()">添加商品</a>
+            </div>
+        </div>
+        <!--           选择商品  弹出框       -->
+        <div id="addGoods" class="NewBuyer add_Goods">
+            <div class="whitebg">
+                <div class="title">选择商品</div>
+                <div class="close" ng-click="hide_addGoods()"></div>
+                <div class="AGbox">
+                    <div class="tool clearfix">
+                        <div class="left">
+                            <div class="inlineb">
+                                <a class="icon" ng-class="{'icon-checked':headChecked,'icon-check':!headChecked}" id="check_all" ng-click="SelectAll(products)"></a>
+                                <span>全部商品（{{products.length}}）</span>
+                            </div>
+                            <div class="inlineb sjx">
+                                <span>系列:</span>
+                                <select>
+                                    <option ng-repeat="c in collections" ng-click="fliter_col_goods" value="c.id">{{ c.title }}</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="search right">
+                            <input type="text" placeholder="输入商品名或商品编码" ng-model="product_key"/>
+                            <span ng-click="filter_goods()" class="icon icon-search2"></span>
+                        </div>
+                    </div>
+                    <div class="orderbox">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <td>图例</td>
+                                    <td>商品信息</td>
+                                    <td>商品编码</td>
+                                    <td>尺码</td>
+                                    <td>数量</td>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr ng-repeat="product in products" >
+                                    <td>
+                                        <a class="icon" ng-class="{'icon-checked':product.checked,'icon-check':!product.checked}" ng-click="SelectOne(product,product.id)"></a>
+                                        <img ng-src="{{host}}{{product.image.url}}" />
+                                    </td>
+                                    <td class="maxwh">
+                                         <div class="tabbox textleft">{{product.name}} </div>
+                                         <div class="tabbox textleft">&yen;&nbsp;{{product.price}} </div>
+                                    </td>
+                                    <td>
+                                        <div class="tabbox" ng-repeat="k in product.sizes" >{{k.sku}} </div>
+                                    </td>
+                                    <td >
+                                        <div class="tabbox" ng-repeat="s in product.sizes" >{{s.size}} </div>
+                                    </td>
+                                    <td> 
+                                        <div class="tabbox" ng-repeat="s in product.sizes">
+                                            <a class="changeNum" ng-click="dec_num(s, product)">-</a>
+                                            <span class="num">{{s.amount}}</span>
+                                            <a class="changeNum" ng-click="inc_num(s, product)">+</a>
+                                        </div>
+                                    </td>
+                                </tr>   
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="chosebtn clearfix">
+                        <div class="left">
+                            <a ng-click="add_goods_sure()">添加</a>
+                        </div>
+    <!--                     <div class="right pagename">
+                            <a href="#">1</a>
+                            <a href="#">2</a>
+                            <a href="#">3</a>
+                        </div> -->
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="info-list addshadow">
+            <div class="info-head">收件信息</div>
+            <div class="reinfo">
+                <div class="reinfo-1 distpicker" ng-show="choice_finish && chosed_buyer">
+                    <span>
+                        <i>收货地址：</i>
+                        <span class="sjx"><select id="province"></select></span>
+                        <span class="sjx"><select id="city" class="small"></select></span>
+                        <input type="text" ng-model="address" />
+                    </span>
+                </div>
+                <div class="reinfo-1 smallin" ng-show="choice_finish && chosed_buyer">
+                    <span>收件人：<input type="text" ng-model="contact" /></span>
+                    <span>联系电话：<input type="text" ng-model="mobile" /></span>
+                </div>
+           </div>
+        </div>
+        <div class="info-list addshadow">
+            <div class="info-head">
+                <span>订单总结</span>
+            </div>
+            <div class="order_total clearfix">
+                <div class="div"  ng-show="show_goods_box">
+                    <span class="grey-color quantity-info"  ng-show="show_goods_box">
+                        <span>共</span>
+                        <span class="total-quantity">{{total_number}}</span>
+                        <span>件</span>
+                    </span>
+                    <span class="big-font">&yen;{{total_price * chosed_buyer.discount/100}}
+                        <span class="grey-color">(折后价)</span>
+                    </span>
+                    <span class="discount_info">
+                        折扣：
+                        <input class="discount_input" ng-model="chosed_buyer.discount"/>
+                        <span>%</span>
+                    </span>
+                    <div class="operate">
+                        <div class="sjx">
+                            订单状态：
+                            <select ng-model="status_p">
+                                <option value="{{k}}" ng-repeat="(k, v) in payment_status">{{v}}</option>
+                            </select>
+                        </div>
+                        <div class="sjx">
+                            货款状态：
+                            <select ng-model="status_g">
+                              <option value="{{k}}" ng-repeat="(k,v) in goods_status">{{v}}</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="center newOrBtn">
+            <button type="submit" ng-click="new_order()">生成订单</button>
+        </div>
+    </div>
+</div>
+<div ng-include src="'templates/popup.html'"></div>

@@ -1,0 +1,262 @@
+<div ng-include src="'templates/navbar.html'"></div>
+<div ng-include src="'templates/menu.html'"></div>
+<div class="container" ng-class="{'smallmenu': menubool}">
+    <div class="tagtitle"> 新建商品 </div>
+    <div class="wrapper product-info">
+        <div class="addshadow whitebg margintop">
+            <div class="info-head" id="1">图片编辑</div>
+            <div class="product-head">
+            <div class="l-image-upload" ng-class="{'imgborder': image1==null}">
+                    <img ng-show="image1" ng-src="{{'data:'+image1.filetype+';base64,'+image1.base64}}" height="227" width="227" />
+                    <div class="plus-box-container" ng-hide="image1">
+                        <div class="plus-box">
+                            <div class="btn-plus" ></div>
+                        </div>
+                    </div>
+                    <a class="profile-avatar-upload" ng-click="get_avatar()"></a>
+                </div>
+                <div class="s-image-container">
+                <div class="s-image-upload" ng-class="{'imgborder': image2==null}">
+                        <img ng-show="image2" ng-src="{{'data:'+image2.filetype+';base64,'+image2.base64}}" height="148" width="148" />
+                        <div class="s-plus-box-container" ng-hide="image2">
+                            <div class="plus-box">
+                                <div class="btn-plus" ></div>
+                            </div>
+                        </div>
+                        <input type='file' ng-model='image2' base-sixty-four-input>
+                    </div>
+                <div class="s-image-upload" ng-class="{'imgborder': image3==null}">
+                        <img ng-show="image3" ng-src="{{'data:'+image3.filetype+';base64,'+image3.base64}}" height="148" width="148" />
+                        <div class="s-plus-box-container" ng-hide="image3">
+                            <div class="plus-box">
+                                <div class="btn-plus"></div>
+                            </div>
+                        </div>
+                        <input type='file' ng-model='image3' base-sixty-four-input>
+                    </div>
+                <div class="s-image-upload" ng-class="{'imgborder': image4==null}">
+                        <img ng-show="image4" ng-src="{{'data:'+image4.filetype+';base64,'+image4.base64}}" height="148" width="148" />
+                        <div class="s-plus-box-container" ng-hide="image4">
+                            <div class="plus-box">
+                                <div class="btn-plus"></div>
+                            </div>
+                        </div>
+                        <input type='file' ng-model='image4' base-sixty-four-input>
+                    </div>
+                <div class="s-image-upload" ng-class="{'imgborder': image5==null}">
+                        <img ng-show="image5" ng-src="{{'data:'+image5.filetype+';base64,'+image5.base64}}" height="148" width="148" />
+                        <div class="s-plus-box-container" ng-hide="image5">
+                            <div class="plus-box">
+                                <div class="btn-plus"></div>
+                            </div>
+                        </div>
+                        <input type='file' ng-model='image5' base-sixty-four-input>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <form id = "newProductForm" name = "newProductForm" novalidate >
+        <div class="addshadow whitebg">
+            <div class="info-head" id="2">信息编辑</div>
+            <div class="container-line">
+                    <div class="edit-product">
+                    <div class="mright">
+                        <div class="label-control">
+                            <label class="label-name"><span class="need">*</span>商品名称:</label>
+                        </div>
+                        <div>
+                            <input name="productName"  class="edit-product-input" type="text" ng-model='product.name' required
+                                   ng-class="{'pro-error-input':submitted && newProductForm.productName.$invalid}">
+                        </div>
+                    </div>
+                    <div>
+                        <div class="label-control">
+                            <label class="label-name"><span class="need">*</span>零售价:</label>
+                        </div>
+                        <div>
+                            <input name="productPrice" class="edit-product-input"  type="number"  ng-model="product.price"
+                                   ng-class="{'pro-error-input':submitted && newProductForm.productPrice.$invalid}" required/>
+                        </div>
+                    </div>
+                    <div class="mright">
+                        <div class="label-control">
+                            <label class="label-name"><span class="need">*</span>性别:</label>
+                        </div>
+                        <div class="label-control">
+                            <span class="sjx"></span>
+                            <input type="text" name="productGender" ng-focus="showRelaDiv($event)" ng-blur="hideRelaDiv($event)" data-tip="如果此件商品同时适合男性和女性，请选择全部" ng-click="nextdiv_show()" ng-class="{'pro-error-input':submitted && newProductForm.productGender.$invalid}" ng-model="product.gender" class="edit-product-input pointer" readonly  required/>
+                            <div class="addPtip nextdiv">
+                                <p value="全部" ng-click="nextdiv_post('全部')">全部</p>
+                                <p value="男装" ng-click="nextdiv_post('男装')">男装</p>
+                                <p value="女装" ng-click="nextdiv_post('女装')">女装</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div>
+                        <div class="label-control">
+                            <label class="label-name"><span class="need">*</span>系列:</label>
+                        </div>
+                        <div class="label-control">
+                            <span class="sjx"></span>
+                            <input type="text" name="collection" ng-focus="showRelaDiv($event)" ng-blur="hideRelaDiv($event)" data-tip="请选择商品所属系列，系列可在“商品管理—系列设置”中编辑" ng-click="collshow_hide()"  ng-model="collections_dict[product.collection]" ng-class="{'pro-error-input':submitted && newProductForm.collection.$invalid}" class="edit-product-input pointer"  readonly required/>
+                            <div class="ccshow addPtip">
+                                <p class="ccshowvalue" ng-repeat="i in collections" ng-click="hidePost(i)" value="{{i.id}}">
+                                {{i.title}}</p>
+                                <p class="ccshowvalue popAddBtn" ng-click="popAdd_show()">添加系列</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="mright">
+                        <div class="label-control">
+                            <label class="label-name"><span class="need">*</span>颜色:</label>
+                        </div>
+                        <div>
+                            <input class="edit-product-input" name="productColor" type="text" ng-model="product.color" ng-class="{'pro-error-input':submitted && newProductForm.productColor.$invalid}" required />
+                        </div>
+                        <div class="label-control martop"><label class="label-name"><span class="need">*</span>色号:</label></div>
+                        <div>
+                            <input class="edit-product-input" name="productClnum" type="text" ng-model="product.color_code" ng-class="{'pro-error-input':submitted && newProductForm.productClnum.$invalid}" required/>
+                        </div>
+                        <div class="label-control martop">
+                            <label class="label-name">洗涤方式:</label>
+                        </div>
+                        <div>
+                            <input class="edit-product-input"  type="text"  ng-model='product.washing_method' />
+                        </div>
+                    </div>
+                <div>
+                    <div class="label-control">
+                        <label class="label-name">面料:</label>
+                    </div>
+                    <div class="miaoliao">
+                        <textarea ng-focus="showRelaDiv($event)" ng-blur="hideRelaDiv($event)" data-tip="请填写该商品所用面料，每种面料输入一行" class="edit-product-input textheight"  ng-model="product.composition"></textarea>
+                    </div>
+                </div>
+            </div>
+            <div class="pro-intro">
+                <div class="label-control">
+                    <label class="label-name">商品简介：</label>
+                </div>
+                <div>
+                    <textarea class="product-instr" placeholder="限制90个字数以内" ng-model="product.description"></textarea>
+                </div>
+                </div>
+            </div>
+        </div>
+        <div class="addshadow whitebg">
+            <div class="info-head" id="3"> 尺码信息
+                <a class="iconHelp" ng-click="showRelaDiv($event)" ng-mouseout="hideRelaDiv($event)" data-tip="点击“添加一行”开始填写该商品的尺码，每种尺码对应的详细信息请填写在对应的“尺寸明细”当中">?</a>
+            </div>
+            <div class="container-line">
+                <div class="size-table-container">
+                    <table class="size-table" cellspacing="0" style="border-collapse: collapse;">
+                        <thead>
+                        <tr class="label-name">
+                            <th>尺寸</th>
+                            <th>商家编码</th>
+                            <th>商品条形码</th>
+                            <th>尺寸明细</th>
+                            <th class="delete-td"></th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr ng-repeat="i in product.sizes">
+                            <td><div><input type="text" placeholder="尺寸" ng-model="i.size" name="size{{$index}}" ng-class="{'pro-error-input':submitted && newProductForm.size{{$index}}.$invalid}" required/></div></td>
+                            <td><div><input type="text" placeholder="SKU" ng-model="i.sku" name="sku{{$index}}" ng-class="{'pro-error-input':submitted && newProductForm.sku{{$index}}.$invalid}" required/></div></td>
+                            <td><div><input type="text" placeholder="条形码" ng-model="i.barcode"></div></td>
+                            <td><div><input type="text" placeholder="尺寸明细" ng-model="i.description"></div></td>
+                            <td class="delete-td">
+                                <div class="icon icon-delete" ng-click="delete_size($index, i.id)"></div>
+                            </td>
+                        </tr>
+                        </tbody>
+                    </table>
+                    <div class="size-table">
+                        <div class="add-size" ng-click="add_size()">
+                            <div class="add-line">+&nbsp;&nbsp;添加尺寸</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        </form>
+        <div class="addshadow whitebg">
+        <div class="info-head" id="4">渠道</div>
+        <div class="container-line">
+        <div class="online-checkbox label-name">
+            <div class="checkbox" ng-click="category_show_hide()"></div>
+            <div class="inlineb">在线订货<a class="iconHelp" ng-click="showRelaDiv($event)" ng-mouseout="hideRelaDiv($event)"  data-tip="勾选并填入相应信息过后，商品将出现在订货平台" >?</a></div>
+        </div>
+        <form id = "newProductForm2" name = "newProductForm2" novalidate class="category-detail" ng-show="product.online_sale">
+            <div class="labelwidth pifajia padsix">
+                <label><span class="need">*</span>批发价</label>
+                <input name="wholesale_price" ng-focus="showRelaDiv($event)" ng-blur="hideRelaDiv($event)" data-tip="在线订货中，将作为以批发价为基准的买手订货基准价，可在用户管理调整买手定价方式是以批发价为基准还是以零售价为基准" type="number" ng-model="product.wholesale_price" ng-class="{'pro-error-input':submitted && newProductForm2.wholesale_price.$invalid}" required />
+            </div>
+            <div class="size-num clearfix">
+                <div class="size-num-name label-name">供货尺寸：</div>
+                <div class="size-num-label padsix">
+                    <div class="product_size_show" ng-repeat="i in product.sizes" ng-hide="i.size == null">
+                        <label class="closestyle" ng-click="change_wholesale_size(i, $event)"><span>{{i.size}}</span><em class="closesize" >x</em></label>
+                    </div>
+                    <div class="inlineb honghuo">
+                        <a class="iconHelp" ng-click="showRelaDiv($event)" ng-mouseout="hideRelaDiv($event)"  data-tip="在此选择在线订货供货的尺码，黑色背景为提供订货，无背景为不提供订货">?</a>
+                    </div>
+                </div>
+            </div>
+            <div class="lastbuy-time-container padsix">
+                <div class="label-name">最后下单时间</div>
+                <input class="lastbuy-time" />
+                <a class="iconHelp" ng-click="showRelaDiv($event)" ng-mouseout="hideRelaDiv($event)"  data-tip="超出最后下单时间，商品将自动在订货平台隐藏，不填写则商品会一直可供订货">?</a>
+            </div>
+        </form>
+            </div>
+        </div>
+        <div class="deal-btn">
+            <a class="btn-product-edit" onclick="javascript:window.history.back();">返回</a>
+            <a class="btn-product-edit enterClick" id="saveNew" ng-click="new_product($event, newProductForm.$valid,newProductForm2.$valid)">保存</a>
+        </div>
+
+    </div>
+</div>
+<div class="avatar">
+    <p>滑动鼠标中间按钮调整图片大小，在蓝色方框外单击鼠标拖动，可调整图片位置。在蓝色方框内单击鼠标拖动，可调整方框位置。</p>
+    <div class="avatar_left">
+          <div  class="img-container">
+            <img  ng-src="{{dataUrl}}" width="800" height="300"
+                 ng-cropper
+                 ng-cropper-proxy="cropperProxy"
+                 ng-cropper-show="showEvent"
+                 ng-cropper-hide="hideEvent"
+                 ng-cropper-options="options">
+          </div>
+    </div>
+    <div class="avatar_right">
+        <a class="btn_avatar_save" ng-click="crop_image()">保存</a>
+        <a class="btn_avatar_cancel">取消</a>
+    </div>
+    <input type="file" onchange="angular.element(this).scope().onFile(this.files[0])" style="visibility:hidden"
+           accept=".jpg,.jpeg,.bmp,.png">
+</div>
+<div class="wrapper_white"></div>
+<div id="popAddColl" class="popAddCollShow"> 
+    <div class="popwrap">  
+        <form>
+            <label>系列名称:</label> <input type="text" ng-model="col_title"/> <br/>
+            <label>系列简介:</label> <textarea ng-model="col_description"></textarea>
+            <div class="blockBtn">
+                <button type="button" ng-click="popAdd_hide()">取消</button>
+                <button type="button" ng-click="add_collection()">确定</button>
+            </div>
+        </form>
+    </div>
+</div>
+<div id="dontsave" class="popAddCollShow">
+    <div class="popwrap"> 
+        <div class="tip">确定不保存您的修改吗？</div>
+        <div class="blockBtn">
+            <button type="button" ng-click="backsaveT()">确定</button>
+            <button type="button" ng-click="hidedtsT()">取消</button>
+        </div>
+    </div>
+</div>
+<div ng-include src="'templates/popup.html'"></div>

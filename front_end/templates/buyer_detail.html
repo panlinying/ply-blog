@@ -1,0 +1,132 @@
+<div ng-include src="'templates/navbar.html'"></div>
+<div ng-include src="'templates/menu.html'"></div>
+<div class="container" ng-class="{'smallmenu': menubool}">
+    <div class="wrapper" ng-show="show_detail">
+        <div class="buyer_detail_container clearfix">
+            <div class="left-container addshadow">
+                <div class="brand_img"><img ng-src="{{host}}{{buyer.image.url}}"></div>
+                <div class="brand_info">
+                    <ul>
+                        <li><i>店铺简介：</i>{{buyer.description}}</li>
+                        <li><i>成立时间：</i>{{buyer.create_time}}</li>
+                        <li><i>主要品牌：</i><span class="inline" ng-repeat="i in buyer.brands">{{i}}</span></li>
+                        <li><i>店铺数量：</i>{{buyer.shops.length}}</li>
+                        <li>
+                            <i>店铺信息：</i>
+                            <div class="inline">
+                                <p ng-repeat="i in buyer.shops">
+                                     {{i.name}} &emsp; {{i.area}}㎡ &emsp; {{i.province}} {{i.city}} {{i.address}}
+                                </p>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <div class="right-container addshadow">
+                <div class="buyer_image"><img ng-src="{{host}}{{buyer.avatar.url}}"></div>
+                <div class="buyer_certification" ng-show="buyer.status == 0">未认证</div>
+                <div class="buyer_certification" ng-show="buyer.status == 1">已认证</div>
+                <div class="buyer_name">{{buyer.username}}</div>
+                <div class="buyer_mobile">{{buyer.phone}}</div>
+                <div class="buyer_email">{{buyer.email}}</div>
+                <div class="select-price">
+                    <div class="long-select-container">
+                        <label class="long-select">
+                            <div>
+                                <select ng-model="buyer.price_type" ng-focus="showRelaDiv($event)" ng-blur="hideRelaDiv($event)" data-tip="以零售价为基准，买手将以零售价为基准的折后价作为订货价；以批发价为基准，买手将以批发价为基准的折后价作为订货价。">
+                                    <option value="0">零售价为基准</option>
+                                    <option value="1">批发价为基准</option>
+                                </select>
+                            </div>
+                        </label>
+                    </div>
+                </div>
+                <div class="discount">折扣<input type="num" placeholder="折扣" ng-model="buyer.discount" ng-focus="showRelaDiv($event)" ng-blur="hideRelaDiv($event)" data-tip="此为您和对应买手的固定订货折扣，例：无折扣则填写100；45折则填写45，7折则填写70。针对不同订单，折扣可在确认订单前在订单详情页更改。" /></div>
+                <div class="certify">
+                    <div class="true_certify" ng-click='confirmAccept()' ng-show="buyer.status == 0">接受</div>
+                    <div class="false_certify" ng-click='confirmRefuse()' ng-show="buyer.status == 0">不接受</div>
+                    <div class="certify_save " ng-class= "{'btn-loading-login':avoidClick,'enterClick':buyer.status == 1}" ng-disabled="avoidClick" ng-click='update()' ng-show="buyer.status == 1">保存</div>
+                </div>
+                <div class="confirm-head" id="confirmAccept">
+                    <p>接受关联后，买手便可订购您的商品,</p>
+                    <p>确定接受吗?</p>
+                </div>
+                <div class="confirm-head" id="confirmRefuse">
+                    <p>若不接受关联，买手将从您的列表中删除，</p>
+                    <p>真的不接受吗？</p>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="wrapper" ng-show="buyer.create_by_brand">
+        <div class="addshadow NewBuyer small">
+            <div class="topimg center">
+                <div class="cssimg">
+                    <img ng-src="images/peol.png" />
+                </div>
+            </div>
+            <form name="NBForm">
+            <div class="buyerInfo">
+                <ul>
+                    <li>
+                        <label>*买手店名:</label>
+                        <span class="buydata" ng-hide="editbuyer" >{{buyer.company}}</span>
+                        <input name="shop" id="Edit_company" ng-show="editbuyer" type="text" ng-model="buyer.company" required/>
+                    </li>
+                    <li>
+                        <label>*买手姓名:</label>
+                        <span class="buydata" ng-hide="editbuyer" >{{buyer.username}}</span>
+                        <input ng-show="editbuyer" id="Edit_username" type="text" name="username"  ng-model="buyer.username" required/>
+                    </li>
+                    <li>
+                        <label>*邮箱:</label>
+                        <span class="buydata" ng-hide="editbuyer" >{{buyer.email}}</span>
+                        <input ng-show="editbuyer" id="Edit_email" type="email" name="email" ng-model="buyer.email"  required/>
+                    </li>
+                    <li>
+                        <label>*电话:</label>
+                        <span class="buydata" ng-hide="editbuyer" >{{buyer.phone}}</span>
+                        <input ng-show="editbuyer" id="Edit_phone" type="text" name="phone" ng-model="buyer.phone" required/></li>
+                    <li>
+                        <label class="top">*收货地址:</label>
+                        <span class="buydata" ng-hide="editbuyer">{{buyer.province}}</span>
+                        <span class="buydata" ng-hide="editbuyer">{{buyer.city}}</span>
+                        <span class="buydata" ng-hide="editbuyer">{{buyer.address}}</span>
+                        <div class="distpicker" ng-show="editbuyer" >
+                            <div class="inlineb sjx"><select class="addressPro" id="Edit_province" required></select></div>
+                            <div class="inlineb sjx"><select class="addressCity" id="Edit_city" required></select></div><br/>
+                            <input ng-show="editbuyer" id="Edit_address" name="address" type="text" ng-model="buyer.address" required />
+                        </div>
+                    </li>
+                    <li> 
+                        <label>*价格方式:</label> 
+                        <span class="buydata" ng-hide="editbuyer" >{{price_type[buyer.price_type]}}</span>
+                        <div class="inlineb icon icon-dpd" ng-show="editbuyer">
+                            <select class="price" id="Edit_price_type" ng-model="buyer.price_type">
+                                <option value="0">零售价为基准</option>
+                                <option value="1">批发价为基准</option>
+                            </select>
+                        </div>
+                        <div class="inlineb dis" ng-show="editbuyer">
+                            <input type="text" ng-model="buyer.discount" id="Edit_discount" placeholder="折扣" /><span>%</span>
+                        </div>
+                    </li>
+                    <li ng-hide="editbuyer">
+                        <label>*折扣:</label>
+                        <span class="buydata">{{buyer.discount}}%</span>
+                    </li>
+                </ul>
+            </div>
+            </form>
+        </div>
+        <div class="center NewBuyer_botton">
+            <a href="javascript:void(0);" ng-click="Delete_Buyer()">删除</a>
+            <a href="javascript:void(0);" ng-hide="editbuyer" ng-click="Edit_Buyer()">编辑</a>
+            <a href="javascript:void(0);" ng-show="editbuyer" ng-click="Save_Buyer()">保存</a>
+        </div>
+    </div>
+</div>
+
+
+
+<div ng-include src="'templates/popup.html'"></div>

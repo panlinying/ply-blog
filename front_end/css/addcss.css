@@ -1,0 +1,47 @@
+.btn-loading {
+    position: relative;
+    border-color: #c6c6c6;
+}
+
+.btn-loading:before {
+    content: '请稍后';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 400px;
+    height: 200px;
+    margin-left: -208px;
+    margin-top: -100px;
+    padding: 0;
+    color: #a0a0a0;
+    line-height: 200px;
+    background-color: #e6e6e6;
+}
+
+.btn-loading:after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 10px;
+    height: 10px;
+    margin-left: 14px;
+    margin-top: -9px;
+    padding: 0;
+    border-radius: 50%;
+    border-style: solid;
+    border-width: 4px;
+    border-color: #ccc #aaa #aaa #aaa;
+    transition: all .3s ease-in-out;
+    transform: rotate(360deg);
+    animation: rotate 0.8s linear infinite;
+}
+@keyframes rotate {
+    0% {
+        transform: rotate(0deg);
+    }
+
+    100% {
+        transform: rotate(360deg);
+    }
+}
